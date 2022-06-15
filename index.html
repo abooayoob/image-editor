@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+  </head>
+  <body>
+    <h1>
+      This is a static template, there is no bundler or bundling involved!
+    </h1>
+    <input type="file" id="imageFile" capture="user" accept="image/*" />
+    <img id="theImage" style="width: 400px;" />
+  </body>
+
+  <script>
+    const i = document.querySelector("#imageFile");
+    const img = document.querySelector("#theImage");
+
+    i.addEventListener("change", inputChange);
+
+    function inputChange(e) {
+      const firstFile = e.target.files[0];
+      addImage(firstFile, img);
+    }
+
+    function addImage(fileObject, imgElement) {
+      const reader = new FileReader();
+      reader.addEventListener("load", insertImage);
+      reader.readAsDataURL(fileObject);
+    }
+
+    function insertImage(e) {
+      img.setAttribute("src", e.target.result);
+    }
+  </script>
+</html>
